@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.common;
 
-import com.acmerobotics.dashboard.config.Config;
+//import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 /*
@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * These are not the only parameters; some are located in the localizer classes, drive base classes,
  * and op modes themselves.
  */
-@Config
+//@Config
 public class DriveConstants {
 
     /*

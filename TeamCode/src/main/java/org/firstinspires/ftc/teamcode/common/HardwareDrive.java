@@ -21,14 +21,14 @@ public class HardwareDrive {
     public DcMotorEx rf = null;
     public DcMotorEx lb = null;
     public DcMotorEx rb = null;
-    public DcMotorEx lift = null;
-    public CRServo serv0;
+    //public DcMotorEx lift = null;
+    //public CRServo serv0;
 
     /* declare our gyro (imu) and camera */
-    public BNO055IMU imu;
-    public OpenCvCamera camera;
-    public Orientation angles;
-    public Acceleration gravity;
+    //public BNO055IMU imu;
+    //public OpenCvCamera camera;
+    //public Orientation angles;
+    //public Acceleration gravity;
 
     /**
      * The initialization method used in every driveMode and
@@ -43,8 +43,8 @@ public class HardwareDrive {
         rf = hwMap.get(DcMotorEx.class, "right_front");
         lb = hwMap.get(DcMotorEx.class, "left_back");
         rb = hwMap.get(DcMotorEx.class, "right_back");
-        lift = hwMap.get(DcMotorEx.class, "lift");
-        serv0 = hwMap.get(CRServo.class, "serv0");
+        //lift = hwMap.get(DcMotorEx.class, "lift");
+        //serv0 = hwMap.get(CRServo.class, "serv0");
 
         /* all of our gyro initialization stuff */
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
@@ -54,33 +54,33 @@ public class HardwareDrive {
         parameters.loggingEnabled = true;
         parameters.loggingTag = "IMU";
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-        imu = hwMap.get(BNO055IMU.class, "imu");
-        imu.initialize(parameters);
+        //imu = hwMap.get(BNO055IMU.class, "imu");
+        //imu.initialize(parameters);
 
         /* find our webcam and initialize it */
         int cameraMonitorViewID = hwMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hwMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createWebcam(hwMap.get(WebcamName.class, "log920"), cameraMonitorViewID);
+        //camera = OpenCvCameraFactory.getInstance().createWebcam(hwMap.get(WebcamName.class, "log920"), cameraMonitorViewID);
 
         /* make sure all of our motors are going the right way */
         lf.setDirection(DcMotorEx.Direction.REVERSE);
         lb.setDirection(DcMotorEx.Direction.REVERSE);
         rf.setDirection(DcMotorEx.Direction.FORWARD);
         rb.setDirection(DcMotorEx.Direction.FORWARD);
-        lift.setDirection(DcMotorEx.Direction.REVERSE);
+        //lift.setDirection(DcMotorEx.Direction.REVERSE);
 
         /* stop and reset the encoder */
         lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /* run each motor using the encoder so we can get data */
         lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
 

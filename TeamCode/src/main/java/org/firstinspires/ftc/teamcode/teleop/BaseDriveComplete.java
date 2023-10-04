@@ -23,7 +23,7 @@ public class BaseDriveComplete extends LinearOpMode {
     private final HardwareDrive robot = new HardwareDrive();
     private final ElapsedTime runtime = new ElapsedTime();
 
-    double drivePower = 0.40;
+    double drivePower = 0.60;
 
     @Override
     public void runOpMode() {
@@ -31,14 +31,14 @@ public class BaseDriveComplete extends LinearOpMode {
         robot.init(hardwareMap);
         telemetry.addData("Say", "Hello Driver");
         runtime.reset();
-        robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
 
-        robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
+        //robot.imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
         while (opModeIsActive()) {
-            UpdateGripper();
+            //UpdateGripper();
             UpdateTelemetry();
             if (gamepad1.right_bumper) drivePower = 1;
             DriveTrainBase(drivePower);
@@ -48,26 +48,27 @@ public class BaseDriveComplete extends LinearOpMode {
 
     @Utility.Encapsulate
     private void DriveTrainBase(double drivePower) {
-        double directionX = Math.pow(gamepad1.left_stick_x, 1);
-        double directionY = Math.pow(gamepad1.left_stick_y, 1);
-        double directionR = -Math.pow(gamepad1.right_stick_x, 1);
-        double liftPower = Math.pow(gamepad2.right_stick_y, 1);
+        double directionX = Math.pow(gamepad1.left_stick_x, 1); //Strafe
+        double directionY = -Math.pow(gamepad1.left_stick_y, 1); //Forward
+        double directionR = Math.pow(gamepad1.right_stick_x, 1); //Turn
+
+        //double liftPower = Math.pow(gamepad2.right_stick_y, 1);
 
         if (gamepad1.left_stick_x < 0.2 && gamepad1.left_stick_x > -0.2) directionX = 0;
         if (gamepad1.left_stick_y < 0.2 && gamepad1.left_stick_y > -0.2) directionY = 0;
 
-        robot.lf.setPower((directionY + directionR - directionX) * drivePower);
-        robot.rf.setPower((-directionY + directionR - directionX) * drivePower);
-        robot.lb.setPower((directionY + directionR + directionX) * drivePower);
-        robot.rb.setPower((-directionY + directionR + directionX) * drivePower);
+        robot.lf.setPower((directionY + directionR + directionX) * drivePower);
+        robot.rf.setPower((directionY - directionR - directionX) * drivePower);
+        robot.lb.setPower((directionY + directionR - directionX) * drivePower);
+        robot.rb.setPower((directionY - directionR + directionX) * drivePower);
 
-        int liftPos = robot.lift.getCurrentPosition();
+        /*int liftPos = robot.lift.getCurrentPosition();
         if (liftPos < Constants.elevatorPositionTop && gamepad2.right_stick_y < 0) {
             robot.lift.setPower((gamepad2.left_stick_y) * 0.1 - -0.001);
         }
         else if (liftPos > Constants.elevatorPositionBottom && gamepad2.right_stick_y > 0) {
             robot.lift.setPower((gamepad2.left_stick_y) * 0.01);
-        } else robot.lift.setPower((liftPower - 0.001) * 1);
+        } else robot.lift.setPower((liftPower - 0.001) * 1);*/
     }
 
     private void DriveMicroAdjust() {
@@ -106,29 +107,29 @@ public class BaseDriveComplete extends LinearOpMode {
         }
     }
 
-    private void UpdateGripper() {
+    /*private void UpdateGripper() {
         if (gamepad2.left_trigger > 0.01) robot.serv0.setPower(0.22 * gamepad2.left_trigger - 0);
         else if (gamepad2.right_trigger > 0.01) robot.serv0.setPower(-0.16 * gamepad2.right_trigger + 0);
-    }
+    }*/
 
     private void UpdateTelemetry() {
         telemetry.addData("g1.X", gamepad1.left_stick_x);
         telemetry.addData("g1.Y", -gamepad1.left_stick_y);
         telemetry.addData("g1.R", gamepad1.right_stick_x);
-        telemetry.addData("Arm Position", robot.lift.getCurrentPosition());
+        //telemetry.addData("Arm Position", robot.lift.getCurrentPosition());
         telemetry.addData("g2.L", gamepad2.right_stick_y);
         telemetry.update();
     }
 
     public void composeTelemetry() {
         telemetry.addAction(() -> {
-            robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            robot.gravity = robot.imu.getGravity();
+            //robot.angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+            //robot.gravity = robot.imu.getGravity();
         });
 
-        telemetry.addLine().addData("status", () -> robot.imu.getSystemStatus().toShortString()).addData("calib", () -> robot.imu.getCalibrationStatus().toString());
-        telemetry.addLine().addData("heading", () -> formatAngle(robot.angles.angleUnit, robot.angles.firstAngle)).addData("roll", () -> formatAngle(robot.angles.angleUnit, robot.angles.secondAngle)).addData("pitch", () -> formatAngle(robot.angles.angleUnit, robot.angles.thirdAngle));
-        telemetry.addLine().addData("grvty", () -> robot.gravity.toString()).addData("mag", () -> String.format(Locale.getDefault(), "%.3f", Math.sqrt(robot.gravity.xAccel * robot.gravity.xAccel + robot.gravity.yAccel * robot.gravity.yAccel + robot.gravity.zAccel * robot.gravity.zAccel)));
+        //telemetry.addLine().addData("status", () -> robot.imu.getSystemStatus().toShortString()).addData("calib", () -> robot.imu.getCalibrationStatus().toString());
+        //telemetry.addLine().addData("heading", () -> formatAngle(robot.angles.angleUnit, robot.angles.firstAngle)).addData("roll", () -> formatAngle(robot.angles.angleUnit, robot.angles.secondAngle)).addData("pitch", () -> formatAngle(robot.angles.angleUnit, robot.angles.thirdAngle));
+        //telemetry.addLine().addData("grvty", () -> robot.gravity.toString()).addData("mag", () -> String.format(Locale.getDefault(), "%.3f", Math.sqrt(robot.gravity.xAccel * robot.gravity.xAccel + robot.gravity.yAccel * robot.gravity.yAccel + robot.gravity.zAccel * robot.gravity.zAccel)));
     }
     String formatDegrees(double degrees) { return String.format(Locale.getDefault(), "%.1f", AngleUnit.DEGREES.normalize(degrees)); }
     String formatAngle(AngleUnit angleUnit, double angle) { return formatDegrees(AngleUnit.DEGREES.fromUnit(angleUnit, angle)); }

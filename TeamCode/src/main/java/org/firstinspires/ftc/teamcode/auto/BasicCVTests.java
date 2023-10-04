@@ -85,9 +85,9 @@ public class BasicCVTests extends LinearOpMode {
         serv0.setPower(-0.1);
         sleep(500);
         StrafeRight(1200, autoPower);
-        robot.lift.setTargetPosition(Constants.elevatorPositionLow);
-        robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lift.setPower(0.8);
+        //robot.lift.setTargetPosition(Constants.elevatorPositionLow);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.lift.setPower(0.8);
         DriveForward(2200, autoPower);
         StrafeLeft(540, autoPower);
 
@@ -99,9 +99,9 @@ public class BasicCVTests extends LinearOpMode {
             telemetry.addData("Junction distance: ", junctionDistance);
             telemetry.update();
         }
-        robot.lift.setTargetPosition(Constants.elevatorPositionTop);
-        robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lift.setPower(0.8);
+        //robot.lift.setTargetPosition(Constants.elevatorPositionTop);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.lift.setPower(0.8);
         sleep(2000);
         if (junctionDistance < 8) { // Fail-safe in case the pole is outside our FOV
             TeleopStyleDrive((junctionLocation.x - 400) / 400, (junctionDistance - 4) / 6, 0, 0.25, 200);

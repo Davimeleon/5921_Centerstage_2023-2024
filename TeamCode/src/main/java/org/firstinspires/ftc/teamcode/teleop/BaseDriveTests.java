@@ -32,8 +32,8 @@ public class BaseDriveTests extends LinearOpMode {
         robot.init(hardwareMap);
         telemetry.addData("Say", "Hello Driver");
         runtime.reset();
-        robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         waitForStart();
         while (opModeIsActive()) loop1();
@@ -52,12 +52,12 @@ public class BaseDriveTests extends LinearOpMode {
             lTgtPos = Constants.elevatorPositionBottom;
         }
 
-        telemetry.addData("Difference between target and current lift positions", lTgtPos - robot.lift.getCurrentPosition());
+        //telemetry.addData("Difference between target and current lift positions", lTgtPos - robot.lift.getCurrentPosition());
 
         // The absolute sum of the positions of the motors of the left side minus the same for the left side.
         // Proportional to the amount turned.
 
-        int liftTgtOffset = lTgtPos - robot.lift.getCurrentPosition(); // if negative, lift is higher than target position
+        /*int liftTgtOffset = lTgtPos - robot.lift.getCurrentPosition(); // if negative, lift is higher than target position
 
         if (liftTgtOffset > 100) { // lift is too high
             robot.lift.setPower(0.6);
@@ -68,7 +68,7 @@ public class BaseDriveTests extends LinearOpMode {
         } else {
             robot.lift.setPower(-0.001);
             telemetry.addLine("Lift position OK");
-        }
+        }*/
 
         if (gamepad2.left_trigger > 0.01) {serv1.setPower(gamepad2.left_trigger);}
 
@@ -137,7 +137,7 @@ public class BaseDriveTests extends LinearOpMode {
         telemetry.addData("g1.X", gamepad1.left_stick_x);
         telemetry.addData("g1.Y", -gamepad1.left_stick_y);
         telemetry.addData("g1.R", gamepad1.right_stick_x);
-        telemetry.addData("Arm Position", robot.lift.getCurrentPosition());
+        //telemetry.addData("Arm Position", robot.lift.getCurrentPosition());
         telemetry.addData("g2.L", gamepad2.right_stick_y);
         telemetry.update();
     }

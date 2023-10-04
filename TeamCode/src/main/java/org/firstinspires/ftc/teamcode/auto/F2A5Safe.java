@@ -72,13 +72,13 @@ public class F2A5Safe extends LinearOpMode {
 
     Constants constants = new Constants();
     HardwareDrive robot = new HardwareDrive();
-    private CRServo serv0;
+    //private CRServo serv0;
     private final ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        serv0 = hardwareMap.get(CRServo.class, "serv0");
+        //serv0 = hardwareMap.get(CRServo.class, "serv0");
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "log920"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(tagsize, fx, fy, cx, cy);
@@ -146,7 +146,7 @@ public class F2A5Safe extends LinearOpMode {
 
         double autoPower = 0.40;
         int sleepTime = 1;
-        serv0.setPower(-0.1);
+        //serv0.setPower(-0.1);
         sleep(sleepTime);
         DriveForward(200, autoPower);
         sleep(sleepTime);
@@ -431,25 +431,25 @@ public class F2A5Safe extends LinearOpMode {
                 break;
         }
         //raise arm
-        robot.lift.setTargetPosition(targetPos);
-        robot.lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lift.setPower(1.00);
-        sleep(2300);
-        robot.lift.setPower(0); //Brake arm, maybe unnecessary?
+        //robot.lift.setTargetPosition(targetPos);
+        //robot.lift.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.lift.setPower(1.00);
+        //sleep(2300);
+        //robot.lift.setPower(0); //Brake arm, maybe unnecessary?
         //Drive forward
         SetBrakes(false);
         DriveForward(75, 0.15);
         //Release cone
-        serv0.setPower(0.18);
+        //serv0.setPower(0.18);
         //Back up
         DriveReverse(75, 0.30);
         sleep(250);
         //lower arm
-        robot.lift.setTargetPosition(Constants.elevatorPositionBottom); // The lift's mechanism might not be enough to hold it at downLiftHeight,
+        //robot.lift.setTargetPosition(Constants.elevatorPositionBottom); // The lift's mechanism might not be enough to hold it at downLiftHeight,
         // in which case we have to do a bunch of annoying stuff
-        robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.lift.setPower(0.75);
+        //robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.lift.setPower(0.75);
         sleep(750);
         SetBrakes(true);
     }
