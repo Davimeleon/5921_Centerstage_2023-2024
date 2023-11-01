@@ -43,6 +43,7 @@ public class BaseDriveComplete extends LinearOpMode {
             if (gamepad1.right_bumper) drivePower = 1;
             DriveTrainBase(drivePower);
             DriveMicroAdjust();
+            intakeDrive();
         }
     }
 
@@ -52,7 +53,8 @@ public class BaseDriveComplete extends LinearOpMode {
         double directionY = -Math.pow(gamepad1.left_stick_y, 1); //Forward
         double directionR = Math.pow(gamepad1.right_stick_x, 1); //Turn
 
-        //double liftPower = Math.pow(gamepad2.right_stick_y, 1);
+
+        double armPower = Math.pow(gamepad2.right_stick_y, 1);
 
         if (gamepad1.left_stick_x < 0.2 && gamepad1.left_stick_x > -0.2) directionX = 0;
         if (gamepad1.left_stick_y < 0.2 && gamepad1.left_stick_y > -0.2) directionY = 0;
@@ -62,13 +64,15 @@ public class BaseDriveComplete extends LinearOpMode {
         robot.lb.setPower((directionY + directionR - directionX) * drivePower);
         robot.rb.setPower((directionY - directionR + directionX) * drivePower);
 
-        /*int liftPos = robot.lift.getCurrentPosition();
-        if (liftPos < Constants.elevatorPositionTop && gamepad2.right_stick_y < 0) {
-            robot.lift.setPower((gamepad2.left_stick_y) * 0.1 - -0.001);
+        int armPos = robot.arm.getCurrentPosition();
+        robot.arm.setPower((armPower - 0.001) * 1);
+
+        /*if (armPos < Constants.elevatorPositionTop && gamepad2.right_stick_y < 0) {
+            robot.arm.setPower((gamepad2.left_stick_y) * 0.1 - -0.001);
         }
-        else if (liftPos > Constants.elevatorPositionBottom && gamepad2.right_stick_y > 0) {
-            robot.lift.setPower((gamepad2.left_stick_y) * 0.01);
-        } else robot.lift.setPower((liftPower - 0.001) * 1);*/
+        else if (armPos > Constants.elevatorPositionBottom && gamepad2.right_stick_y > 0) {
+            robot.arm.setPower((gamepad2.left_stick_y) * 0.01);
+        } else*/
     }
 
     private void DriveMicroAdjust() {
@@ -104,6 +108,14 @@ public class BaseDriveComplete extends LinearOpMode {
             robot.rf.setPower(-0.4);
             robot.lb.setPower(0.4);
             robot.rb.setPower(-0.4);
+        }
+    }
+
+    private void intakeDrive(){
+        double directionY = Math.pow(gamepad2.left_stick_y, 1);
+
+        if (directionY > 0.2  || directionY < 0.2){
+            robot.intake.setPower(directionY);
         }
     }
 

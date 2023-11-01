@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode.common;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -21,6 +22,8 @@ public class HardwareDrive {
     public DcMotorEx rf = null;
     public DcMotorEx lb = null;
     public DcMotorEx rb = null;
+    public DcMotorEx intake = null;
+    public DcMotorEx arm = null;
     //public DcMotorEx lift = null;
     //public CRServo serv0;
 
@@ -43,6 +46,8 @@ public class HardwareDrive {
         rf = hwMap.get(DcMotorEx.class, "right_front");
         lb = hwMap.get(DcMotorEx.class, "left_back");
         rb = hwMap.get(DcMotorEx.class, "right_back");
+        intake = hwMap.get(DcMotorEx.class, "intake");
+        arm = hwMap.get(DcMotorEx.class, "arm");
         //lift = hwMap.get(DcMotorEx.class, "lift");
         //serv0 = hwMap.get(CRServo.class, "serv0");
 
@@ -66,6 +71,8 @@ public class HardwareDrive {
         lb.setDirection(DcMotorEx.Direction.REVERSE);
         rf.setDirection(DcMotorEx.Direction.FORWARD);
         rb.setDirection(DcMotorEx.Direction.FORWARD);
+        intake.setDirection(DcMotorEx.Direction.FORWARD);
+        arm.setDirection(DcMotorEx.Direction.FORWARD);
         //lift.setDirection(DcMotorEx.Direction.REVERSE);
 
         /* stop and reset the encoder */
@@ -73,6 +80,8 @@ public class HardwareDrive {
         lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /* run each motor using the encoder so we can get data */
@@ -80,6 +89,8 @@ public class HardwareDrive {
         lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
