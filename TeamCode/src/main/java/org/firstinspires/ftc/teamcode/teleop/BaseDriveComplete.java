@@ -65,7 +65,7 @@ public class BaseDriveComplete extends LinearOpMode {
         robot.rb.setPower((directionY - directionR + directionX) * drivePower);
 
         int armPos = robot.arm.getCurrentPosition();
-        robot.arm.setPower((armPower - 0.001) * 1);
+        robot.arm.setPower((armPower) * -1);
 
         /*if (armPos < Constants.elevatorPositionTop && gamepad2.right_stick_y < 0) {
             robot.arm.setPower((gamepad2.left_stick_y) * 0.1 - -0.001);
@@ -128,8 +128,9 @@ public class BaseDriveComplete extends LinearOpMode {
         telemetry.addData("g1.X", gamepad1.left_stick_x);
         telemetry.addData("g1.Y", -gamepad1.left_stick_y);
         telemetry.addData("g1.R", gamepad1.right_stick_x);
-        //telemetry.addData("Arm Position", robot.lift.getCurrentPosition());
-        telemetry.addData("g2.L", gamepad2.right_stick_y);
+        telemetry.addData("Arm Position", robot.arm.getCurrentPosition());
+        //telemetry.addData("g2.L", gamepad2.right_stick_y);
+        telemetry.addData("g2.arm", gamepad2.right_stick_y);
         telemetry.update();
     }
 
