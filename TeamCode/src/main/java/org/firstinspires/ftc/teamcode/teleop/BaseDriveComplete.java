@@ -24,6 +24,7 @@ public class BaseDriveComplete extends LinearOpMode {
     private final ElapsedTime runtime = new ElapsedTime();
 
     double drivePower = 0.60;
+    double servoTargetPosition = 0.6;
 
     @Override
     public void runOpMode() {
@@ -53,7 +54,6 @@ public class BaseDriveComplete extends LinearOpMode {
         double directionY = -Math.pow(gamepad1.left_stick_y, 1); //Forward
         double directionR = Math.pow(gamepad1.right_stick_x, 1); //Turn
 
-
         double armPower = Math.pow(gamepad2.right_stick_y, 1);
 
         if (gamepad1.left_stick_x < 0.2 && gamepad1.left_stick_x > -0.2) directionX = 0;
@@ -66,6 +66,22 @@ public class BaseDriveComplete extends LinearOpMode {
 
         int armPos = robot.arm.getCurrentPosition();
         robot.arm.setPower((armPower) * -1);
+
+        if (gamepad2.dpad_down && servoTargetPosition < 0.8){
+            servoTargetPosition += 0.004;
+        }
+        else if (gamepad2.dpad_up && servoTargetPosition > 0){
+            servoTargetPosition -= 0.004;
+        }
+        telemetry.addData("servo tgt: ", servoTargetPosition);
+        if (robot.armServo.getPosition() != servoTargetPosition){
+            telemetry.addLine("Repositioning servo");
+            robot.armServo.setPosition(servoTargetPosition);
+        }
+
+        if (gamepad2.a){
+            robot.servoPlane.setPosition(0);
+        }
 
         /*if (armPos < Constants.elevatorPositionTop && gamepad2.right_stick_y < 0) {
             robot.arm.setPower((gamepad2.left_stick_y) * 0.1 - -0.001);
@@ -115,7 +131,7 @@ public class BaseDriveComplete extends LinearOpMode {
         double directionY = Math.pow(gamepad2.left_stick_y, 1);
 
         if (directionY > 0.2  || directionY < 0.2){
-            robot.intake.setPower(directionY);
+            robot.intake.setPower(directionY/3);
         }
     }
 

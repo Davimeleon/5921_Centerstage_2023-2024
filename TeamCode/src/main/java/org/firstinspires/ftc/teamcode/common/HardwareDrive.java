@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
@@ -25,7 +26,8 @@ public class HardwareDrive {
     public DcMotorEx intake = null;
     public DcMotorEx arm = null;
     //public DcMotorEx lift = null;
-    //public CRServo serv0;
+    public Servo armServo;
+    public Servo servoPlane;
 
     /* declare our gyro (imu) and camera */
     //public BNO055IMU imu;
@@ -48,6 +50,8 @@ public class HardwareDrive {
         rb = hwMap.get(DcMotorEx.class, "right_back");
         intake = hwMap.get(DcMotorEx.class, "intake");
         arm = hwMap.get(DcMotorEx.class, "arm");
+        armServo = hwMap.get(Servo.class, "armServo");
+        servoPlane = hwMap.get(Servo.class, "servoPlane");
         //lift = hwMap.get(DcMotorEx.class, "lift");
         //serv0 = hwMap.get(CRServo.class, "serv0");
 
