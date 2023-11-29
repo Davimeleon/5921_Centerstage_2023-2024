@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.common.Constants;
+import org.firstinspires.ftc.teamcode.common.DriveConstants;
 import org.firstinspires.ftc.teamcode.common.HardwareDrive;
 import org.firstinspires.ftc.teamcode.common.Utility;
 
@@ -45,6 +46,7 @@ public class BaseDriveComplete extends LinearOpMode {
             DriveTrainBase(drivePower);
             DriveMicroAdjust();
             intakeDrive();
+            trapdoor();
         }
     }
 
@@ -67,6 +69,9 @@ public class BaseDriveComplete extends LinearOpMode {
         int armPos = robot.arm.getCurrentPosition();
         robot.arm.setPower((armPower) * -1);
 
+        //if ((armPos < DriveConstants.armMaxPos || armPower > 0) && (armPos > DriveConstants.armMinPos || armPower < 0)){
+        //}
+
         if (gamepad2.dpad_down && servoTargetPosition < 0.8){
             servoTargetPosition += 0.004;
         }
@@ -79,7 +84,7 @@ public class BaseDriveComplete extends LinearOpMode {
             robot.armServo.setPosition(servoTargetPosition);
         }
 
-        if (gamepad2.a){
+        if (gamepad2.y){
             robot.servoPlane.setPosition(0);
         }
 
@@ -124,6 +129,15 @@ public class BaseDriveComplete extends LinearOpMode {
             robot.rf.setPower(-0.4);
             robot.lb.setPower(0.4);
             robot.rb.setPower(-0.4);
+        }
+    }
+
+    private void trapdoor(){
+        if (gamepad2.x){
+            robot.trapdoor.setPosition(0.1);
+        }
+        if (gamepad2.b){
+            robot.trapdoor.setPosition(0.9);
         }
     }
 

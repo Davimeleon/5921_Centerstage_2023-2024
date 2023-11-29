@@ -21,7 +21,10 @@ public class autoRed extends LinearOpMode {
     protected DcMotor arm;
     protected DcMotor intake;
     protected Servo armServo;
-    //OpenCvCamera camera;
+    protected Servo trapdoor;
+    OpenCvCamera camera;
+    PipelineRed pipeline = new PipelineRed();
+
     //BasicPipeline pipeline = new BasicPipeline();
 
     enum propPosition {
@@ -42,11 +45,12 @@ public class autoRed extends LinearOpMode {
 
         intake = hardwareMap.get(DcMotor.class, "intake");
         armServo = hardwareMap.get(Servo.class, "armServo");
+        trapdoor = hardwareMap.get(Servo.class, "trapdoor");
 
-        //int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        //camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "camera"), cameraMonitorViewId);
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "camera"), cameraMonitorViewId);
 
-        /*camera.setPipeline(pipeline);
+        camera.setPipeline(pipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
@@ -57,7 +61,7 @@ public class autoRed extends LinearOpMode {
             public void onError(int errorCode) {
 
             }
-        });*/
+        });
 
         lf.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lb.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -74,6 +78,16 @@ public class autoRed extends LinearOpMode {
         rf.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rb.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        while (!isStarted() && !isStopRequested()) {
+            telemetry.addLine("Ensure pixel is in right side of box!!");
+            telemetry.addData("Prop x value: ", pipeline.getJunctionPoint().x);
+            telemetry.addData("Prop area: ", pipeline.getPropAreaAttr());
+            telemetry.update();
+        }
+
+        double propX = pipeline.getJunctionPoint().x;
+        double propArea = pipeline.getPropAreaAttr();
 
         armServo.setPosition(0.57);
         moveForward(-0.2, 3350);

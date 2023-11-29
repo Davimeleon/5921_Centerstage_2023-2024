@@ -28,6 +28,7 @@ public class HardwareDrive {
     //public DcMotorEx lift = null;
     public Servo armServo;
     public Servo servoPlane;
+    public Servo trapdoor;
 
     /* declare our gyro (imu) and camera */
     //public BNO055IMU imu;
@@ -52,6 +53,7 @@ public class HardwareDrive {
         arm = hwMap.get(DcMotorEx.class, "arm");
         armServo = hwMap.get(Servo.class, "armServo");
         servoPlane = hwMap.get(Servo.class, "servoPlane");
+        trapdoor = hwMap.get(Servo.class, "trapdoor");
         //lift = hwMap.get(DcMotorEx.class, "lift");
         //serv0 = hwMap.get(CRServo.class, "serv0");
 
