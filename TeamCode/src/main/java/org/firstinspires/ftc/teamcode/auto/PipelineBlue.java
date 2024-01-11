@@ -19,8 +19,8 @@ import java.util.Optional;
 
 public class PipelineBlue extends OpenCvPipeline {
 
-    public Scalar darkestJunctions = new Scalar(80, 100, 100);
-    public Scalar lightestJunctions = new Scalar(120, 255, 255);
+    public Scalar darkestJunctions = new Scalar(19.8, 60.9, 138.8);
+    public Scalar lightestJunctions = new Scalar(121.5, 134.8, 250);
     public double smallestArea = 4000;
     List<Mat> channels = new ArrayList<>();
     Mat rawYCrCb = new Mat();

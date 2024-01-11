@@ -82,21 +82,21 @@ public class HardwareDrive {
         //lift.setDirection(DcMotorEx.Direction.REVERSE);
 
         /* stop and reset the encoder */
-        lf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        lb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rf.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rb.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        lf.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        lb.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rf.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        rb.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotorEx.RunMode.STOP_AND_RESET_ENCODER);
         //lift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         /* run each motor using the encoder so we can get data */
-        lf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        lb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rf.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rb.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        intake.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        lf.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        lb.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        rf.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        rb.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        intake.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
