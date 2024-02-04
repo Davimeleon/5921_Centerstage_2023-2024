@@ -11,7 +11,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous (name = "autoBlue")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous (name = "autoBlueClose")
 public class autoBlueClose extends LinearOpMode {
 
     protected DcMotor lf;
@@ -109,7 +109,7 @@ public class autoBlueClose extends LinearOpMode {
         //12.96 Battery Constant = 0.92
         //12.85 Battery Constant = 0.93
         //12.78 = 0.94
-        double batteryConstant = 0.905;
+        double batteryConstant = 0.931;
 
         if (propArea > 25000 && propX > 750){ //Right Path
             pathNum = 3;

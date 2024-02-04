@@ -24,7 +24,7 @@ public class BaseDriveComplete extends LinearOpMode {
     private final HardwareDrive robot = new HardwareDrive();
     private final ElapsedTime runtime = new ElapsedTime();
 
-    double drivePower = 0.70;
+    double drivePower = 0.85;
     double servoTargetPosition = 0.312;
     double trapdoorTargetPos = 0.6;
     int upperLimit = 3100;
@@ -51,7 +51,7 @@ public class BaseDriveComplete extends LinearOpMode {
             UpdateTelemetry();
             if (gamepad1.right_bumper) drivePower = 1;
             DriveTrainBase(drivePower);
-            //DriveMicroAdjust();
+            DriveMicroAdjust();
             intakeDrive();
             //trapdoor();
         }
@@ -123,13 +123,15 @@ public class BaseDriveComplete extends LinearOpMode {
         if (gamepad2.y){
             robot.trapdoor.setPosition(0.6); //Close
         }
+        telemetry.addData("trapdoor position: ", robot.trapdoor.getPosition());
+
 
         if (gamepad1.y){
             upperLimit = 10000;
             lowerLimit = -10000;
         }
 
-        if (gamepad1.dpad_down && trapdoorTargetPos < upperLimTrapdoor){ // && servoTargetPosition < 0.8
+        /*if (gamepad1.dpad_down && trapdoorTargetPos < upperLimTrapdoor){ // && servoTargetPosition < 0.8
             trapdoorTargetPos += 0.001;
             if (robot.trapdoor.getPosition() != trapdoorTargetPos){
                 telemetry.addLine("Repositioning servo");
@@ -142,13 +144,13 @@ public class BaseDriveComplete extends LinearOpMode {
                 telemetry.addLine("Repositioning servo");
                 robot.trapdoor.setPosition(trapdoorTargetPos);
             }
-        }
+        }*/
         telemetry.addData("trapdoor tgt: ", trapdoorTargetPos);
 
 
 
-        if (gamepad2.y){
-            robot.servoPlane.setPosition(0);
+        if (gamepad1.b){
+            robot.servoPlane.setPosition(0.6);
         }
 
 
@@ -167,25 +169,25 @@ public class BaseDriveComplete extends LinearOpMode {
 
     private void DriveMicroAdjust() {
         if (gamepad1.dpad_up) {
-            robot.lf.setPower(-0.4);
-            robot.rf.setPower(+0.4);
-            robot.lb.setPower(-0.4);
-            robot.rb.setPower(+0.4);
-        } else if (gamepad1.dpad_down) {
-            robot.lf.setPower(+0.4);
-            robot.rf.setPower(-0.4);
-            robot.lb.setPower(+0.4);
-            robot.rb.setPower(-0.4);
-        } else if (gamepad1.dpad_right) {
-            robot.lf.setPower(0.4);
-            robot.rf.setPower(0.4);
-            robot.lb.setPower(0.4);
-            robot.rb.setPower(0.4);
+            robot.lf.setPower(+0.40);
+            robot.rf.setPower(+0.40);
+            robot.lb.setPower(+0.40);
+            robot.rb.setPower(+0.40);
         } else if (gamepad1.dpad_left) {
-            robot.lf.setPower(-0.4);
-            robot.rf.setPower(-0.4);
-            robot.lb.setPower(-0.4);
-            robot.rb.setPower(-0.4);
+            robot.lf.setPower(-0.50);
+            robot.rf.setPower(+0.50);
+            robot.lb.setPower(+0.50);
+            robot.rb.setPower(-0.50);
+        } else if (gamepad1.dpad_right) {
+            robot.lf.setPower(0.50);
+            robot.rf.setPower(-0.50);
+            robot.lb.setPower(-0.50);
+            robot.rb.setPower(+0.50);
+        } else if (gamepad1.dpad_down) {
+            robot.lf.setPower(-0.40);
+            robot.rf.setPower(-0.40);
+            robot.lb.setPower(-0.40);
+            robot.rb.setPower(-0.40);
         }
 
         if (gamepad1.left_trigger == 1) {
@@ -214,7 +216,7 @@ public class BaseDriveComplete extends LinearOpMode {
         double directionY = Math.pow(gamepad2.left_stick_y, 1);
 
         if (directionY > 0.2  || directionY < 0.2){
-            robot.intake.setPower(directionY/1.3);
+            robot.intake.setPower(directionY);
         }
     }
 

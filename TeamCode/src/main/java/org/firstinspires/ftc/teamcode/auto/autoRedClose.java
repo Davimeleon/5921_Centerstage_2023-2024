@@ -11,7 +11,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous (name = "autoRed")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous (name = "autoRedClose")
 public class autoRedClose extends LinearOpMode {
 
     protected DcMotor lf;
@@ -108,7 +108,7 @@ public class autoRedClose extends LinearOpMode {
         //12.96 Battery Constant = 0.92
         //12.85 Battery Constant = 0.93
         //12.78 = 0.94
-        double batteryConstant = 0.905;
+        double batteryConstant = 0.914;
 
         if (propArea > 20000 && propX > 545){ //Right Path
             moveForward(-0.3, (int)(300 * batteryConstant));
@@ -129,7 +129,7 @@ public class autoRedClose extends LinearOpMode {
             sleep((int)(2600 * batteryConstant));
             arm.setPower(0);
             moveStrafing(-0.3, (int)(175 * batteryConstant)); //Strafe Right
-            moveForward(-0.3, (int)(1950 * batteryConstant));
+            moveForward(-0.3, (int)(2000 * batteryConstant));
         }
 
         else if (propArea > 20000){ //Middle Path
@@ -150,7 +150,7 @@ public class autoRedClose extends LinearOpMode {
             sleep(500);
             moveStrafing(-0.3, (int)(400 * batteryConstant)); //Strafe Right
             sleep(500);
-            moveForward(-0.2, (int)(1400 * batteryConstant));
+            moveForward(-0.2, (int)(1430 * batteryConstant));
 
             //Drop
 
@@ -160,9 +160,9 @@ public class autoRedClose extends LinearOpMode {
             moveForward(-0.3, (int)(1850 * batteryConstant));
             moveTurning(0.2, (int)(2750 * batteryConstant));
             sleep(200);
-            moveForward(-0.3, (int)(500 * batteryConstant));
+            moveForward(-0.3, (int)(400 * batteryConstant));
             sleep(100);
-            moveForward(0.3, (int)(200 * batteryConstant));
+            moveForward(0.3, (int)(220 * batteryConstant));
             intake.setPower(-0.6);
             sleep((int)(1500 * batteryConstant));
             intake.setPower(0);
@@ -178,7 +178,7 @@ public class autoRedClose extends LinearOpMode {
             sleep(500);
             moveStrafing(-0.2, (int)(440 * batteryConstant)); //Strafe Right
             sleep(500);
-            moveForward(-0.20, (int)(1100 * batteryConstant));
+            moveForward(-0.20, (int)(1130 * batteryConstant));
         }
 
         armServo.setPosition(0.05);
