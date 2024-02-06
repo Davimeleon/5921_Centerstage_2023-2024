@@ -1,4 +1,7 @@
 package org.firstinspires.ftc.teamcode.common;
+import java.util.HashMap;
+
+import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 
 public class Constants {
 
@@ -10,6 +13,14 @@ public class Constants {
     public static final int elevatorPositionBottom = -20; // changed from -10 to -20
     public static final int elevatorPositionAboveCone = -400;
     public final int elevatorAcrossDrop = -2000;
+
+    public static final HashMap<String, Direction> motorDirections = new HashMap<String, Direction>() {{
+        put("left_front", Direction.REVERSE);
+        put("right_front", Direction.FORWARD);
+        put("left_back", Direction.REVERSE);
+        put("right_back", Direction.FORWARD);
+        put("lift", Direction.REVERSE);
+    }};
 
     // Capping Servo Positions
     public double capStart = 0.6; //Straight Up Vertical
